@@ -1,0 +1,16 @@
+CACHE MANIFEST
+# v1.0.1
+
+cordova/index.js
+#android plugins
+cordova/android/cordova_plugins.js
+cordova/android/cordova.js
+cordova/android/plugins/cordova-plugin-device/www/device.js
+cordova/android/plugins/cordova-plugin-splashscreen/www/splashscreen.js
+cordova/android/plugins/cordova-plugin-statusbar/www/statusbar.js
+cordova/android/plugins/jpush-phonegap-plugin/www/JPushPlugin.js
+
+#ios plugins
+
+NETWORK:
+*

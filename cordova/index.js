@@ -16,10 +16,10 @@ const loadCordova = ()=>{
     if(/RunningWithCordova/i.test(navigator.userAgent)){
         let cordova_name = "cordova.js";
         if(/android/i.test(navigator.userAgent)){
-            cordova_name = 'android/cordova.js';
+            cordova_name = 'cordova/android/cordova.js';
         }
         else if(/iPhone/i.test(navigator.userAgent)){
-            cordova_name = 'ios/cordova.js';
+            cordova_name = 'cordova/ios/cordova.js';
         }
 
         loadJs(cordova_name,function(){});
