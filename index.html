@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jpushTest</title>
+</head>
+<body>
+<a></a>
+</body>
+<script type="text/javascript" src="cordova/index.js"></script>
+<script>
+    document.addEventListener('deviceready', function(){
+        var jpush = window.plugins && window.plugins.jPushPlugin;
+
+        function getExtras(event) {
+            let extras = event.extras || {};
+            if (/iPhone/i.test(navigator.userAgent)) {
+                extras.sound = event.sound;
+            }
+            return extras;
+        }
+
+        function setTags() {
+            if (jpush) {
+                let tags = ['13900000000'];
+                jpush.setTags(tags, function (errorcode) {
+                    console.log(`设置${tags}   标签, errorcode 值${errorcode}`)
+                }, function (e) {
+                    console.log('设置标签错误:' + e);
+                });
+            }
+        }
+        setTags();
+
+        document.removeEventListener("jpush.openNotification");
+        document.removeEventListener("jpush.receiveNotification");
+        document.addEventListener("jpush.openNotification",function(event){
+            let extras = getExtras(event);
+            //...do something
+        }, false);
+        document.addEventListener("jpush.receiveNotification",function(event){
+            let extras = getExtras(event);
+            //...do something
+        }, false);
+    }, false);
+</script>
+</html>
