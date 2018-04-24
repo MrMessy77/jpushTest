@@ -9,6 +9,7 @@
 </body>
 <script type="text/javascript" src="cordova/index.js"></script>
 <script>
+    //baseUrl：cordova文件所在的目录
     loadCordova('',() => {
         document.addEventListener('deviceready', function(){
             var jpush = window.plugins && window.plugins.jPushPlugin;
