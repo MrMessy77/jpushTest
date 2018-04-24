@@ -9,39 +9,41 @@
 </body>
 <script type="text/javascript" src="cordova/index.js"></script>
 <script>
-    document.addEventListener('deviceready', function(){
-        var jpush = window.plugins && window.plugins.jPushPlugin;
+    loadCordova('',() => {
+        document.addEventListener('deviceready', function(){
+            var jpush = window.plugins && window.plugins.jPushPlugin;
 
-        function getExtras(event) {
-            let extras = event.extras || {};
-            if (/iPhone/i.test(navigator.userAgent)) {
-                extras.sound = event.sound;
+            function getExtras(event) {
+                let extras = event.extras || {};
+                if (/iPhone/i.test(navigator.userAgent)) {
+                    extras.sound = event.sound;
+                }
+                return extras;
             }
-            return extras;
-        }
 
-        function setTags() {
-            if (jpush) {
-                let tags = ['13900000000'];
-                jpush.setTags(tags, function (errorcode) {
-                    console.log(`设置${tags}   标签, errorcode 值${errorcode}`)
-                }, function (e) {
-                    console.log('设置标签错误:' + e);
-                });
+            function setTags() {
+                if (jpush) {
+                    let tags = ['13900000000'];
+                    jpush.setTags(tags, function (errorcode) {
+                        console.log(`设置${tags}   标签, errorcode 值${errorcode}`)
+                    }, function (e) {
+                        console.log('设置标签错误:' + e);
+                    });
+                }
             }
-        }
-        setTags();
+            setTags();
 
-        document.removeEventListener("jpush.openNotification");
-        document.removeEventListener("jpush.receiveNotification");
-        document.addEventListener("jpush.openNotification",function(event){
-            let extras = getExtras(event);
-            //...do something
+            document.removeEventListener("jpush.openNotification");
+            document.removeEventListener("jpush.receiveNotification");
+            document.addEventListener("jpush.openNotification",function(event){
+                let extras = getExtras(event);
+                //...do something
+            }, false);
+            document.addEventListener("jpush.receiveNotification",function(event){
+                let extras = getExtras(event);
+                //...do something
+            }, false);
         }, false);
-        document.addEventListener("jpush.receiveNotification",function(event){
-            let extras = getExtras(event);
-            //...do something
-        }, false);
-    }, false);
+    });
 </script>
 </html>

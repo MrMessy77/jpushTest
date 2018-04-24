@@ -12,18 +12,16 @@ const loadJs = (url,cb)=>{
     script.onreadystatechange = loadFunction;
     document.getElementsByTagName("head")[0].appendChild(script);
 };
-const loadCordova = ()=>{
+const loadCordova = (baseUrl,cb) => {
     if(/RunningWithCordova/i.test(navigator.userAgent)){
         let cordova_name = "cordova.js";
         if(/android/i.test(navigator.userAgent)){
-            cordova_name = 'cordova/android/cordova.js';
+            cordova_name = baseUrl+'cordova/android/cordova.js';
         }
         else if(/iPhone/i.test(navigator.userAgent)){
-            cordova_name = 'cordova/ios/cordova.js';
+            cordova_name = baseUrl+'cordova/ios/cordova.js';
         }
 
-        loadJs(cordova_name,function(){});
-    };
+        loadJs(cordova_name,function(){cb()});
+    }
 };
-
-loadCordova();
